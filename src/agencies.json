@@ -1,0 +1,115 @@
+{
+    "agencies": [
+      {
+        "name": "Agency 1",
+        "location": "123 Main Street, City A, Country A",
+        "phoneNumber": "123-456-7890",
+        "email": "agency1@example.com",
+        "expertise": ["Expertise A1", "Expertise A2"],
+        "securityQuestion": "What is your favorite color?",
+        "licenseNumber": "AG123456",
+        "password": "password1",
+        "confirmPassword": "password1"
+      },
+      {
+        "name": "Agency 2",
+        "location": "456 Elm Street, City B, Country B",
+        "phoneNumber": "234-567-8901",
+        "email": "agency2@example.com",
+        "expertise": ["Expertise B1", "Expertise B2"],
+        "securityQuestion": "What is your mother's maiden name?",
+        "licenseNumber": "AG234567",
+        "password": "password2",
+        "confirmPassword": "password2"
+      },
+      {
+        "name": "Agency 3",
+        "location": "789 Oak Street, City C, Country C",
+        "phoneNumber": "345-678-9012",
+        "email": "agency3@example.com",
+        "expertise": ["Expertise C1", "Expertise C2"],
+        "securityQuestion": "What is the name of your first pet?",
+        "licenseNumber": "AG345678",
+        "password": "password3",
+        "confirmPassword": "password3"
+      },
+      {
+        "name": "Agency 4",
+        "location": "101 Pine Street, City D, Country D",
+        "phoneNumber": "456-789-0123",
+        "email": "agency4@example.com",
+        "expertise": ["Expertise D1", "Expertise D2"],
+        "securityQuestion": "What is your favorite book?",
+        "licenseNumber": "AG456789",
+        "password": "password4",
+        "confirmPassword": "password4"
+      },
+      {
+        "name": "Agency 5",
+        "location": "202 Maple Street, City E, Country E",
+        "phoneNumber": "567-890-1234",
+        "email": "agency5@example.com",
+        "expertise": ["Expertise E1", "Expertise E2"],
+        "securityQuestion": "What is your favorite movie?",
+        "licenseNumber": "AG567890",
+        "password": "password5",
+        "confirmPassword": "password5"
+      },
+      {
+        "name": "Agency 6",
+        "location": "303 Cedar Street, City F, Country F",
+        "phoneNumber": "678-901-2345",
+        "email": "agency6@example.com",
+        "expertise": ["Expertise F1", "Expertise F2"],
+        "securityQuestion": "What is your favorite food?",
+        "licenseNumber": "AG678901",
+        "password": "password6",
+        "confirmPassword": "password6"
+      },
+      {
+        "name": "Agency 7",
+        "location": "404 Birch Street, City G, Country G",
+        "phoneNumber": "789-012-3456",
+        "email": "agency7@example.com",
+        "expertise": ["Expertise G1", "Expertise G2"],
+        "securityQuestion": "What is your favorite hobby?",
+        "licenseNumber": "AG789012",
+        "password": "password7",
+        "confirmPassword": "password7"
+      },
+      {
+        "name": "Agency 8",
+        "location": "505 Willow Street, City H, Country H",
+        "phoneNumber": "890-123-4567",
+        "email": "agency8@example.com",
+        "expertise": ["Expertise H1", "Expertise H2"],
+        "securityQuestion": "What is your favorite place?",
+        "licenseNumber": "AG890123",
+        "password": "password8",
+        "confirmPassword": "password8"
+      },
+      {
+        "name": "Agency 9",
+        "location": "606 Redwood Street, City I, Country I",
+        "phoneNumber": "901-234-5678",
+        "email": "agency9@example.com",
+        "expertise": ["Expertise I1", "Expertise I2"],
+        "securityQuestion": "What is your favorite sport?",
+        "licenseNumber": "AG901234",
+        "password": "password9",
+        "confirmPassword": "password9"
+      },
+      {
+        "name": "Agency 10",
+        "location": "707 Oakwood Street, City J, Country J",
+        "phoneNumber": "012-345-6789",
+        "email": "agency10@example.com",
+        "expertise": ["Expertise J1", "Expertise J2"],
+        "securityQuestion": "What is your favorite song?",
+        "licenseNumber": "AG012345",
+        "password": "password10",
+        "confirmPassword": "password10"
+      }
+    ]
+  }
+  
