@@ -1,0 +1,35 @@
+.landingNavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 3rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #00000029;
+}
+
+.landingNavbar .landingNavbarLinks {
+    gap: 5rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin: 0 4rem;
+}
+
+.landingNavbar .landingNavbarLinks p {
+    transition: 0.1s;
+}
+
+.landingNavbar .landingNavbarLinks p:hover,
+.landingNavbarActive {
+    color: #222;
+    font-weight: 600;
+}
+
+.landingNavbarLogo img {
+    width: 50%;
+}
