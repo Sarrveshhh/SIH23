@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi';
 import disasterType from './disasterType.json';
 import Navbar from './components/Navbar/Navbar';
+import userIcon from './UserLocationIcon';
 
 function Disaster() {
   const [clickedLatLng, setClickedLatLng] = useState(null);
