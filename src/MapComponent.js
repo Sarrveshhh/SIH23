@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import customIcon from "./CustomMarkerIcon";
+import userIcon from "./UserLocationIcon";
 import "./MapComponent.css";
 import Navbar from "./components/Navbar/Navbar";
 
 function MapComponent({ agencies }) {
-  const [userLocation, setUserLocation] = useState(null);
   const[latitude,setLatitude]=useState(null);
   const[longitude,setLongitude]=useState('');
-
+  
   useEffect(() => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -32,13 +32,27 @@ function MapComponent({ agencies }) {
     }
   }, []);
 
+  // useEffect(() => {
+  //   // Use the Geolocation API to get the user's current location
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setUserLocation([latitude, longitude]);
+  //       console.log(setUserLocation);
+  //     },
+  //     (error) => {
+  //       console.error("Error getting user location:", error);
+  //     }
+  //   );
+  // }, []);
+  
   return (
     <>
       <Navbar />
       <div>
       {/* Render userLocation or a loading message */}
       {latitude!=null ? (
-        // <p>User Location: {userLocation[0]}, {userLocation[1]}</p>
+        
         <div className="map">
         <MapContainer
           center={ [latitude,longitude]} // Set the initial center of the map
@@ -51,10 +65,10 @@ function MapComponent({ agencies }) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
             <Marker
-              
               position={[latitude,longitude]} // Assuming "location" contains [latitude, longitude] coordinates
-              
+              icon={userIcon}
             ></Marker>
+
           {agencies.map((agency, index) => (
             <Marker
               key={index}

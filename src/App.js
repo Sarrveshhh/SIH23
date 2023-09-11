@@ -6,14 +6,24 @@ import MapComponent from "./MapComponent"; // Import the AgencyMap component
 import agenciesData from "./agencies.json"; // Import your JSON data
 import Filter from "./Filter.js";
 import Home from "./pages/Home/Home";
+import { useState } from "react";
 
 import Disaster from "./Disaster";
 
 
 
 function App() {
+  const [filteredAgencies, setFilteredAgencies] = useState(agenciesData.agencies);
+
   const handleSearch = (searchText) => {
     console.log("Searching for:", searchText);
+
+    const filtered = agenciesData.agencies.filter((agency) =>
+    agency.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+    // Update the filtered agencies
+    setFilteredAgencies(filtered);
   };
   
   return (
@@ -33,7 +43,7 @@ function App() {
                   onSearch={handleSearch}
                   agencies={agenciesData.agencies}
                 />
-                <MapComponent agencies={agenciesData.agencies} />
+                <MapComponent agencies={filteredAgencies} />
               </div>
             }
           />
