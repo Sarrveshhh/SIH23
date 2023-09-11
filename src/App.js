@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import { useState } from "react";
 
 import Disaster from "./Disaster";
+import Chat from "./pages/Chat/Chat";
 
 
 
@@ -33,7 +34,8 @@ function App() {
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/register" element={<RegistrationForm/>} />
           <Route exact path="/home" element={<Home/>} />
-          <Route exact path="/test" element={<Disaster/>} />
+          <Route exact path="/add-disaster" element={<Disaster/>} />
+          <Route exact path="/chat" element={<Chat />} />
           <Route
             exact
             path="/map"
