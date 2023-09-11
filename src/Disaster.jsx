@@ -183,6 +183,7 @@ function Disaster() {
                 eventHandlers={eventHandlers}
                 position={[latitude, longitude]}
                 ref={markerRef}
+                icon={userIcon}
               >
                 <Popup minWidth={90}>
                   <span onClick={toggleDraggable}>
