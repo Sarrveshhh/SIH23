@@ -7,17 +7,23 @@ import agenciesData from "./agencies.json"; // Import your JSON data
 import Filter from "./Filter.js";
 import Home from "./pages/Home/Home";
 
+import Disaster from "./Disaster";
+
+
+
 function App() {
   const handleSearch = (searchText) => {
     console.log("Searching for:", searchText);
   };
+  
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="/register" element={<RegistrationForm />} />
-          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/register" element={<RegistrationForm/>} />
+          <Route exact path="/home" element={<Home/>} />
+          <Route exact path="/test" element={<Disaster/>} />
           <Route
             exact
             path="/map"
