@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi';
 import disasterType from './disasterType.json';
+import Navbar from './components/Navbar/Navbar';
 
 function Disaster() {
   const [clickedLatLng, setClickedLatLng] = useState(null);
@@ -68,7 +69,8 @@ function Disaster() {
   };
   return (
     <>
-      <div className="w-1/2 mx-auto ">
+      <Navbar />
+      <div className="w-1/2 mx-auto mt-20">
         <h1 className="font-bold text-3xl mb-10 mt-2">Add disaster </h1>
         <div class="mb-4 flex">
           <label
