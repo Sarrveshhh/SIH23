@@ -6,35 +6,55 @@ import Navbar from "./components/Navbar/Navbar";
 
 function MapComponent({ agencies }) {
   const [userLocation, setUserLocation] = useState(null);
+  const[latitude,setLatitude]=useState(null);
+  const[longitude,setLongitude]=useState('');
 
   useEffect(() => {
-    // Use the Geolocation API to get the user's current location
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation([latitude, longitude]);
-      },
-      (error) => {
-        console.error("Error getting user location:", error);
-      }
-    );
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Success: position object contains the coordinates
+          const { latitude, longitude } = position.coords;
+          console.log("Latitude:", latitude);
+          setLatitude(latitude);
+
+          console.log("Longitude:", longitude);
+          setLongitude(longitude);
+        },
+        (error) => {
+          // Error: handle the error or show an error message to the user
+          console.log(error);
+        }
+      );
+    } else {
+      // Geolocation API is not supported
+      console.log('Geolocation is not supported');
+    }
   }, []);
 
   return (
     <>
       <Navbar />
-      <div className="map">
+      <div>
+      {/* Render userLocation or a loading message */}
+      {latitude!=null ? (
+        // <p>User Location: {userLocation[0]}, {userLocation[1]}</p>
+        <div className="map">
         <MapContainer
-          center={userLocation || [19.064626928104452, 72.83581727891169]} // Set the initial center of the map
+          center={ [latitude,longitude]} // Set the initial center of the map
           zoom={13} // Set the initial zoom level
           style={{ height: "100vh", width: "100%" }}
-          scrollWheelZoom={false}
+          scrollWheelZoom={true}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-
+            <Marker
+              
+              position={[latitude,longitude]} // Assuming "location" contains [latitude, longitude] coordinates
+              
+            ></Marker>
           {agencies.map((agency, index) => (
             <Marker
               key={index}
@@ -50,6 +70,11 @@ function MapComponent({ agencies }) {
           ))}
         </MapContainer>
       </div>
+      ) : (
+        <p className="mt-40">Loading user location...</p>
+      )}
+    </div>
+      
     </>
   );
 }
