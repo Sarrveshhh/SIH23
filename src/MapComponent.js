@@ -7,23 +7,40 @@ import Navbar from "./components/Navbar/Navbar";
 function MapComponent({ agencies }) {
   const [userLocation, setUserLocation] = useState(null);
 
+  const updateUserLocation = (position) => {
+    const { latitude, longitude } = position.coords;
+    setUserLocation([latitude, longitude]);
+    console.log(userLocation);
+  };
+  
   useEffect(() => {
-    // Use the Geolocation API to get the user's current location
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation([latitude, longitude]);
-      },
+      updateUserLocation,
       (error) => {
         console.error("Error getting user location:", error);
       }
     );
   }, []);
 
+  // useEffect(() => {
+  //   // Use the Geolocation API to get the user's current location
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setUserLocation([latitude, longitude]);
+  //       console.log(setUserLocation);
+  //     },
+  //     (error) => {
+  //       console.error("Error getting user location:", error);
+  //     }
+  //   );
+  // }, []);
+  
   return (
     <>
       <Navbar />
       <div className="map">
+      {userLocation ? ( // Conditionally render MapContainer when userLocation is available
         <MapContainer
           center={userLocation || [19.064626928104452, 72.83581727891169]} // Set the initial center of the map
           zoom={13} // Set the initial zoom level
@@ -49,6 +66,10 @@ function MapComponent({ agencies }) {
             </Marker>
           ))}
         </MapContainer>
+         ) : (
+          // Render a loading message or fallback UI until userLocation is available
+          <p>Loading map...</p>
+        )}
       </div>
     </>
   );
