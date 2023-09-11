@@ -2,12 +2,36 @@ import React, { useEffect, useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import customIcon from "./CustomMarkerIcon";
 import userIcon from "./UserLocationIcon";
+import searchIcon from "./searchAgencyIcon";
 import "./MapComponent.css";
 import Navbar from "./components/Navbar/Navbar";
+import { useMapEvents } from "react-leaflet";
 
 function MapComponent({ agencies }) {
   const[latitude,setLatitude]=useState(null);
   const[longitude,setLongitude]=useState('');
+
+  function LocationMarker() {
+    const [position, setPosition] = useState(null)
+    const map = useMapEvents({
+      click() {
+        map.locate()
+      },
+      locationfound(e) {
+        var lati = agencies[0].longlat[0]
+        var longi = agencies[0].longlat[1]
+        console.log(lati, longi)
+        setPosition([lati, longi])
+        map.flyTo([lati, longi], map.getZoom())
+      },
+    })
+    
+    return position === null ? null : (
+      <Marker position={position}  icon={searchIcon}>
+        <Popup>You are here</Popup>
+      </Marker>
+    )
+  }
   
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -64,6 +88,7 @@ function MapComponent({ agencies }) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
+          {agencies.length===1 && <LocationMarker/>}
             <Marker
               position={[latitude,longitude]} // Assuming "location" contains [latitude, longitude] coordinates
               icon={userIcon}

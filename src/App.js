@@ -7,10 +7,9 @@ import agenciesData from "./agencies.json"; // Import your JSON data
 import Filter from "./Filter.js";
 import Home from "./pages/Home/Home";
 import { useState } from "react";
-
+import 'react-toastify/dist/ReactToastify.css';
+import {toast} from 'react-toastify';
 import Disaster from "./Disaster";
-
-
 
 function App() {
   const [filteredAgencies, setFilteredAgencies] = useState(agenciesData.agencies);
@@ -19,11 +18,16 @@ function App() {
     console.log("Searching for:", searchText);
 
     const filtered = agenciesData.agencies.filter((agency) =>
-    agency.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-    // Update the filtered agencies
-    setFilteredAgencies(filtered);
+      agency.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    console.log(filtered);
+    if (filteredAgencies.length === 0) {
+      toast.error('No agency found!');
+      setFilteredAgencies(agenciesData.agencies);
+    }
+    else{
+      setFilteredAgencies(filtered);
+    }
   };
   
   return (
@@ -43,7 +47,7 @@ function App() {
                   onSearch={handleSearch}
                   agencies={agenciesData.agencies}
                 />
-                <MapComponent agencies={filteredAgencies} />
+                <MapComponent agencies={filteredAgencies}/>
               </div>
             }
           />
