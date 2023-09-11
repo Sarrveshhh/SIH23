@@ -10,6 +10,7 @@ import { useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
 import Disaster from "./Disaster";
+import Chat from "./pages/Chat/Chat";
 
 function App() {
   const [filteredAgencies, setFilteredAgencies] = useState(agenciesData.agencies);
@@ -37,7 +38,8 @@ function App() {
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/register" element={<RegistrationForm/>} />
           <Route exact path="/home" element={<Home/>} />
-          <Route exact path="/test" element={<Disaster/>} />
+          <Route exact path="/add-disaster" element={<Disaster/>} />
+          <Route exact path="/chat" element={<Chat />} />
           <Route
             exact
             path="/map"
