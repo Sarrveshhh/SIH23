@@ -10,30 +10,34 @@ import { useState } from "react";
 
 import Disaster from "./Disaster";
 
-
-
 function App() {
-  const [filteredAgencies, setFilteredAgencies] = useState(agenciesData.agencies);
+  const [filteredAgencies, setFilteredAgencies] = useState(
+    agenciesData.agencies
+  );
 
   const handleSearch = (searchText) => {
     console.log("Searching for:", searchText);
 
     const filtered = agenciesData.agencies.filter((agency) =>
-    agency.name.toLowerCase().includes(searchText.toLowerCase())
-  );
+      agency.name.toLowerCase().includes(searchText.toLowerCase())
+    );
 
     // Update the filtered agencies
     setFilteredAgencies(filtered);
   };
-  
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="/register" element={<RegistrationForm/>} />
-          <Route exact path="/home" element={<Home/>} />
-          <Route exact path="/test" element={<Disaster/>} />
+          <Route exact path="/register" element={<RegistrationForm />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route
+            exact
+            path="/test"
+            element={<Disaster agencies={filteredAgencies} />}
+          />
           <Route
             exact
             path="/map"

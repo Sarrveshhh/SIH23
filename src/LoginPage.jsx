@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const handleInputChange = (event) => {
@@ -19,12 +19,14 @@ function LoginPage() {
   const handleLogin = () => {
     // You can add your login logic here
     const { username, password } = formData;
-    console.log(`Logging in with username: ${username} and password: ${password}`);
+    console.log(
+      `Logging in with username: ${username} and password: ${password}`
+    );
   };
 
   const handleRegister = () => {
     // Handle registration logic
-    navigate('/register')
+    navigate("/register");
   };
 
   return (
