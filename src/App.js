@@ -7,8 +7,10 @@ import agenciesData from "./agencies.json"; // Import your JSON data
 import Filter from "./Filter.js";
 import Home from "./pages/Home/Home";
 import { useState } from "react";
-
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import Disaster from "./Disaster";
+import Chat from "./pages/Chat/Chat";
 
 function App() {
   const [filteredAgencies, setFilteredAgencies] = useState(
@@ -21,9 +23,13 @@ function App() {
     const filtered = agenciesData.agencies.filter((agency) =>
       agency.name.toLowerCase().includes(searchText.toLowerCase())
     );
-
-    // Update the filtered agencies
-    setFilteredAgencies(filtered);
+    console.log(filtered);
+    if (filteredAgencies.length === 0) {
+      toast.error("No agency found!");
+      setFilteredAgencies(agenciesData.agencies);
+    } else {
+      setFilteredAgencies(filtered);
+    }
   };
 
   return (
@@ -32,12 +38,13 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/register" element={<RegistrationForm />} />
-          <Route exact path="/home" element={<Home />} />
           <Route
             exact
-            path="/test"
-            element={<Disaster agencies={filteredAgencies} />}
+            path="/home"
+            element={<Home agencies={agenciesData.agencies} />}
           />
+          <Route exact path="/add-disaster" element={<Disaster />} />
+          <Route exact path="/chat" element={<Chat />} />
           <Route
             exact
             path="/map"
