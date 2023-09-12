@@ -88,6 +88,7 @@ function MapComponent({ agencies }) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
+          {/* {agencies.length===1 && <p className="mt-40 w-100">Hello</p>} */}
           {agencies.length===1 && <LocationMarker/>}
             <Marker
               position={[latitude,longitude]} // Assuming "location" contains [latitude, longitude] coordinates
