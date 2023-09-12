@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/register" element={<RegistrationForm/>} />
-          <Route exact path="/home" element={<Home/>} />
+          <Route exact path="/home" element={<Home agencies={agenciesData.agencies}/>} />
           <Route exact path="/add-disaster" element={<Disaster/>} />
           <Route exact path="/chat" element={<Chat />} />
           <Route
