@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { useCallback, useRef, useMemo } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi';
-import disasterType from './disasterType.json';
-import Navbar from './components/Navbar/Navbar';
-import userIcon from './UserLocationIcon';
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useCallback, useRef, useMemo } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
+import disasterType from "./disasterType.json";
+import Navbar from "./components/Navbar/Navbar";
+import userIcon from "./UserLocationIcon";
 
 function Disaster() {
   const [clickedLatLng, setClickedLatLng] = useState(null);
@@ -16,15 +16,15 @@ function Disaster() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if ('geolocation' in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           // Success: position object contains the coordinates
           const { latitude, longitude } = position.coords;
-          console.log('Latitude:', latitude);
+          console.log("Latitude:", latitude);
           setLatitude(latitude);
 
-          console.log('Longitude:', longitude);
+          console.log("Longitude:", longitude);
           setLongitude(longitude);
         },
         (error) => {
@@ -34,7 +34,7 @@ function Disaster() {
       );
     } else {
       // Geolocation API is not supported
-      console.log('Geolocation is not supported');
+      console.log("Geolocation is not supported");
     }
   }, []);
   const center = {
@@ -42,9 +42,57 @@ function Disaster() {
     lng: longitude,
   };
   const [position, setPosition] = useState(center);
+  const [email, setEmail] = useState("");
+  // const [disasterType, setDisasterType] = useState("");
+  // const [posted, setPosted] = useState(false);
   const markerRef = useRef(null);
   // console.log(position?.lat);
   // console.log(position?.lng);
+
+  // const handleDisasterPost = () => {
+  //   // Find agencies with expertise matching the disaster type
+  //   const matchingAgencies = agencies.filter((agency) =>
+  //     agency.expertise.includes(disasterType)
+  //   );
+
+  //   // Send email notifications to matching agencies
+  //   matchingAgencies.forEach((agency) => {
+  //     sendEmailNotifications(agency.email, disasterType);
+  //   });
+  //   setPosted(true);
+  // };
+
+  // const sendEmailNotifications = (recipient, disasterType) => {
+  //   sendEmail(
+  //     recipient,
+  //     `Disaster Alert: ${disasterType}`,
+  //     `A disaster of type ${disasterType} has been posted.`
+  //   );
+  // };
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (data.status === 401 || !data) {
+      console.log("error");
+    } else {
+      setEmail("");
+      console.log("Email sent");
+    }
+  };
 
   const eventHandlers = useMemo(
     () => ({
@@ -81,13 +129,18 @@ function Disaster() {
             Title:
           </label>
           <input
-            type="text"
             id="title"
+            type="text"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             class="shadow appearance-none border ml-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div className='flex mb-4'>
-          <p className='block text-gray-700 my-auto mr-7 font-bold'>Select date</p>
+        <div className="flex mb-4">
+          <p className="block text-gray-700 my-auto mr-7 font-bold">
+            Select date
+          </p>
           <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}
@@ -98,13 +151,12 @@ function Disaster() {
             className="shadow appearance-none border rounded"
           />
           <p className="ml-2">
-          {' '}
-          Selected Date:{' '}
-          {selectedDate ? selectedDate.toDateString() : 'No date selected'}
-        </p>
+            {" "}
+            Selected Date:{" "}
+            {selectedDate ? selectedDate.toDateString() : "No date selected"}
+          </p>
         </div>
 
-        
         <div class="mb-4 flex">
           <label
             for="description"
@@ -167,12 +219,14 @@ function Disaster() {
           )}
         </div>
 
-        <p className="block text-gray-700 font-bold mb-2">Drop a pin on the exact location of disaster </p>
+        <p className="block text-gray-700 font-bold mb-2">
+          Drop a pin on the exact location of disaster{" "}
+        </p>
         {latitude != null && (
           <MapContainer
             center={[latitude, longitude]}
             zoom={13}
-            style={{ height: '300px', width: '100%' }}
+            style={{ height: "300px", width: "100%" }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -189,8 +243,8 @@ function Disaster() {
                 <Popup minWidth={90}>
                   <span onClick={toggleDraggable}>
                     {draggable
-                      ? 'Marker is draggable'
-                      : 'Click here to make marker draggable and move to desired location'}
+                      ? "Marker is draggable"
+                      : "Click here to make marker draggable and move to desired location"}
                   </span>
                 </Popup>
               </Marker>
@@ -198,7 +252,13 @@ function Disaster() {
           </MapContainer>
         )}
       </div>
-      <button className=' bg-gray-200 shadow appearance-none border rounded p-2'>Submit</button>
+
+      <button variant="primary" type="submit" onClick={sendEmail}>
+        Post Disaster
+      </button>
+      <button className=" bg-gray-200 shadow appearance-none border rounded p-2">
+        Submit
+      </button>
     </>
   );
 }
